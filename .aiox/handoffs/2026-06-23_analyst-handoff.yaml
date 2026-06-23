@@ -1,4 +1,4 @@
-consumed: false
+consumed: true
 from_agent: analyst
 to_agent: analyst
 created: "2026-06-23T14:45:00-03:00"
