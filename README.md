@@ -4,11 +4,11 @@ Dashboard georreferenciado para monitoramento de indicadores da Atenção Primá
 
 ## Problema
 
-Pinhais não possui sistema integrado para monitorar indicadores de saúde. Dados do e-SUS APS, SIA/SIH e demais fontes federais são extraídos manualmente e consolidados em planilhas com defasagem de semanas. Isso gera:
+Pinhais não possui sistema integrado para monitorar todos os seus indicadores de saúde. Dados do e-SUS APS, SIA/SIH e demais fontes federais e estaduais são consumidos diretamente nas respectivas fontes e/ou consolidados localmente em planilhas com defasagem de semanas. O Sistema de Prontuário Eletrônico utilizado exporta a produção ao MS mas o uso dos Painéis de BI oferecidos aos gestores, possui baixa adesão. Isso gera:
 
-- Risco de perda de repasse financeiro federal por não acompanhamento tempestivo das metas
+- Não acompanhamento tempestivo das metas
 - Decisões baseadas em dados defasados ou inexistentes
-- Impossibilidade de estratificação por território/UBS
+- Estratificação por território/UBS/microárea ainda carece de aperfeiçoamentos
 
 ## Solução
 
