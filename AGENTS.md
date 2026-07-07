@@ -1,16 +1,22 @@
-# AGENTS.md - Synkra AIOX (OpenCode / Codex CLI)
+# AGENTS.md — Sala (Synkra AIOX)
 
-Arquivo de instrucoes para agentes trabalhando neste repositorio.
+Instrucoes para agentes OpenCode/Codex CLI neste repositorio.
 
-## Contexto do Repositorio
+## Projeto
 
-- **Projeto:** Synkra AIOX (meta-framework de orquestracao de agentes), codename "Sala"
-- **Stack:** Next.js 15 + React 19 + TypeScript + Tailwind CSS + Prisma (schema pendente)
-- **Status:** Projeto em fase de scaffolding — `src/`, `docs/`, `packages/`, `tests/`, `squads/` ainda nao existem
-- **Framework runtime:** `.aiox-core/` — NAO modificar (protegido por deny rules, L1-L2)
-- **Trabalho do projeto (L4):** `docs/stories/`, `packages/`, `squads/`, `tests/`
+Dashboard de saude publica para Pinhais/PR (Next.js 15 + React 19 + TypeScript + Tailwind 3), construido sobre o meta-framework Synkra AIOX.
 
-## Comandos Essenciais
+**Status:** Pre-desenvolvimento (Discovery). `src/`, `packages/`, `tests/`, `squads/` ainda nao existem. `docs/brief.md` existe.
+
+## Layers (Nao Modificar / Trabalhar)
+
+| Layer | Paths | Regra |
+|-------|-------|-------|
+| L1-L2 (framework) | `.aiox-core/core/`, `.aiox-core/development/tasks/`, `.aiox-core/development/workflows/`, `.aiox-core/infrastructure/`, `.aiox-core/constitution.md` | NAO modificar (deny rules em `.claude/settings.json`) |
+| L3 (config) | `.aiox-core/data/`, `core-config.yaml` | Mutavel |
+| **L4 (projeto)** | `docs/stories/`, `packages/`, `squads/`, `tests/` | **Trabalho do projeto** |
+
+## Comandos
 
 | Comando | Descricao |
 |---------|-----------|
@@ -19,37 +25,29 @@ Arquivo de instrucoes para agentes trabalhando neste repositorio.
 | `npm run lint` | ESLint (flat config) |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | Vitest run |
-| `npm run sync:ide` | Sincroniza definicoes de agentes entre IDEs |
-| `npm run validate:structure` | Valida estrutura de diretorios |
+| `npm run sync:ide` | Sincroniza agentes entre IDEs |
+| `npm run validate:structure` | Valida estrutura |
 | `npm run validate:agents` | Valida definicoes de agentes |
 
-**Ordem de verificacao:** `lint -> typecheck -> test -> build` (Quality Gates, Constitution Art. V)
-
-## Arquitetura
-
-- **Multi-IDE:** Claude Code, Cursor, Codex CLI, Gemini, GitHub Copilot, Kimi, Antigravity — todos sincronizados via `npm run sync:ide`
-- **Agentes locais em:** `.aiox-core/development/agents/` (fonte unica), sincronizados para `.codex/agents/`, `.claude/commands/AIOX/agents/`, `.github/agents/`, `.cursor/rules/agents/`, etc.
-- **Framework (L1-L2, NAO modificar):** `.aiox-core/core/`, `.aiox-core/development/tasks/`, `.aiox-core/development/workflows/`, `.aiox-core/infrastructure/`, `.aiox-core/constitution.md`
-- **Project Config (L3, mutavel):** `.aiox-core/data/`, `core-config.yaml`
-- **Deny rules** em `.claude/settings.json` bloqueiam edicao de L1-L2
+**Quality gates (ordem!):** `lint -> typecheck -> test -> build`
 
 ## Convencoes
 
-- **CLI First:** Toda funcionalidade nova DEVE funcionar 100% via CLI antes de qualquer UI (Constitution Art. I)
-- **Story-Driven:** Nenhum codigo sem story associada em `docs/stories/` (Constitution Art. III)
-- **Absolute Imports:** Preferir `@/` sobre `../../../` (Constitution Art. VI)
-- **Commits:** Convencionais (`feat:`, `fix:`, `chore:`, etc.) com referencia a story ID
-- **Apenas @devops** faz `git push`, PR, release/tag (Constitution Art. II)
-- **CodeRabbit:** Review automatizado via WSL (Ubuntu), severities CRITICAL/HIGH auto-fix
-
-## Peculiaridades Tecnicas
-
+- **CLI First:** Toda funcionalidade nova funciona 100% via CLI antes de qualquer UI
+- **Story-Driven:** Nenhum codigo sem story em `docs/stories/`
+- **Commits:** Convencionais (`feat:`, `fix:`, `chore:`) com story ID
+- **Apenas @devops** faz `git push`, PR, release/tag (hook enforce `.claude/settings.local.json`)
 - **Husky:** `npm test` roda em pre-commit e pre-push
-- **MCP Gateway:** Docker-based em `localhost:8080`, preset `minimal` (default) ou `full`
-- **Prisma:** Em devDependencies mas sem schema ainda (`prisma/schema.prisma` nao existe)
-- **Configs ausentes:** `next.config.*`, `tailwind.config.*`, `vitest.config.*`, `eslint.config.*` — serao criados conforme necessario
-- **Nao ha CI workflows** em `.github/workflows/` ainda
-- **Navegacao:** Usar Grep/Glob (nao `grep`/`rg` no bash)
+- **Absolute imports:** Preferir `@/` sobre `../../../`
+- **Multi-IDE:** Agentes em `.aiox-core/development/agents/` (fonte unica), sincronizados via `npm run sync:ide`
+
+## Ativacao de Agentes (OpenCode)
+
+Agentes definidos em `.opencode/opencode.jsonc`, skills em `.claude/skills/`. Atalhos:
+
+- `@architect`, `@dev`, `@qa`, `@pm`, `@po`, `@sm`, `@analyst`, `@devops`, `@data-engineer`, `@ux-design-expert`, `@squad-creator`, `@aiox-master`
+
+Cada agente carrega definicao de `.aiox-core/development/agents/` e skill correspondente.
 
 <!-- AIOX-MANAGED-START: core -->
 ## Core Rules
